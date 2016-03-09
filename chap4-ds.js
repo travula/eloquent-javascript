@@ -208,3 +208,37 @@ function enth(list, index)
     return enth(list.rest, index - 1);
   }
 }
+
+
+function deepEqual(obj1, obj2) {
+  if (Object.keys(obj1).length != Object.keys(obj2).length) {
+    return false;
+  } else if (Object.keys(obj1).length == 0 &&
+             Object.keys(obj2).length == 0) {
+    if (obj1 == obj2) {
+      return true;
+    } else {
+      return false;
+    }
+  } else {
+    arr1 = Object.keys(obj1);
+    arr2 = Object.keys(obj2);
+    console.log("arr1: ", arr1, "arr2: ", arr2);
+    key1 = arr1[0];
+    key2 = arr2[0];
+    console.log("key1: ", key1, "key2: ", key2);
+    obj_1 = obj1[key1];
+    obj_2 = obj1[key2];
+    console.log("obj_1: ", obj_1, "obj_2: ", obj_2);
+    delete obj1[key1];
+    delete obj2[key2];
+    console.log("obj1: ", obj1, "obj2: ", obj2);
+    var ret_val = false;
+    if (Object.keys(obj1).length == 0 &&
+        Object.keys(obj2).length == 0) {
+      ret_val = true;
+    }
+    
+    return deepEqual(obj_1, obj_2) && deepEqual(obj1, obj2);
+  }
+}
