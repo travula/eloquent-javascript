@@ -208,12 +208,46 @@ function motherChildAvg(persons) {
 
 function ageAveragesByCentury(persons) {
 
-  var byCenttury = {};
-  var centuries = persons.map(function(person) {
-    return Math.ceil(person.died / 100);
+  var byCentury = {};
+  persons.forEach(function(person) {
+    var cent = Math.ceil(person.died / 100);
+    if (!byCentury.hasOwnProperty(cent)) {
+      byCentury[cent] = [];
+    }
+    
+    byCentury[cent].push(person.died - person.born);
   });
-  console.log(centuries);
+
+  for(var cent in byCentury) {
+    console.log("Life Average in %d century in %d", cent, 
+                (byCentury[cent].reduce(function(a, b) {
+                  return a + b;
+                  }, 0)) / byCentury[cent].length);
+  }
 }
 
+function every( array, test) {
+  var ret_val = true;
+  array.forEach(function(element) {
+    if (!test(element)) {
+      ret_val = false;
+    }
+  });
+  return ret_val;
+}
 
+console.log(every([1,2,3,4], function(num) { return num < 5;} ));
 
+function some(array, test) {
+  var ret_val = false;
+  for (var i = 0; i < array.length; i++) {
+    if (test(array[i])) {
+      ret_val = true;
+      break;
+    }
+  }
+  return ret_val;
+}
+  
+
+console.log(some([1,2,3,4], function(num) { return num > 3;} ));
