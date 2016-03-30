@@ -91,6 +91,38 @@ function countAChar(str, ch) {
   return count;
 }
 
+function lexical() {
 
+  var i = "hello";
+  var kk = function() {
+    i += " World";
+    var p = 30;
+  };
+
+  kk();
+  console.log("i = ", i);
+  console.log("p = ", p);
+
+}
+
+var landscape = function () {
+  var result = "";
+  var flat = function ( size ) {
+    for ( var count = 0; count < size ; count ++)
+      result += " _ ";
+  };
+  var mountain = function ( size ) {
+    result += "/";
+    for ( var count = 0; count < size ; count ++)
+      result += "  ";
+    result += "\\";
+  };
+  flat (3) ;
+  mountain (4) ;
+  flat (6) ;
+  mountain (1) ;
+  flat (1) ;
+  return result ;
+};
       
   
